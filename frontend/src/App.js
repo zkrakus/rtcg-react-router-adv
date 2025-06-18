@@ -9,11 +9,13 @@ import NewEventPage from "./pages/NewEvent";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/Root";
 import EventsRootLayout from "./pages/EventsRoots";
+import ErrorPage from "./pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: <ErrorPage/> ,
     children: [
       { index: true, element: <HomePage /> },
       {
