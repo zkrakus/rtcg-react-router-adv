@@ -8,7 +8,9 @@ function ErrorPage() {
   let title = "An error occurred!";
   let message = "something went wrong!";
 
-  if (error.statis === 500) {
+  console.log(error);
+
+  if (error.status === 500) {
     // message = JSON.parse(error.data).message;
     message = error.data.message;
   }
