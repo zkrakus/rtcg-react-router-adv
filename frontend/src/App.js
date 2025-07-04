@@ -4,7 +4,8 @@ import EditEventPage from "./pages/EditEvent";
 import EventsPage, { loader as eventsLoader } from "./pages/Events";
 import EventDetailPage, { loader as eventDetailLoader, action as deleteEventAction } from "./pages/EventDetail";
 import HomePage from "./pages/Home";
-import NewEventPage, { action as newEventAction } from "./pages/NewEvent";
+import NewEventPage from "./pages/NewEvent";
+import { action as maniuplateEventAction } from './components/EventForm'
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/Root";
@@ -38,10 +39,10 @@ const router = createBrowserRouter([
                 index: true,
                 element: <EventDetailPage />
               },
-              { path: "edit", element: <EditEventPage /> },
+              { path: "edit", element: <EditEventPage />, action: maniuplateEventAction },
             ],
           },
-          { path: "new", element: <NewEventPage />, action: newEventAction },
+          { path: "new", element: <NewEventPage />, action: maniuplateEventAction },
         ],
       },
     ],
