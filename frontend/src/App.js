@@ -1,49 +1,63 @@
-// Challenge / Exercise
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import EditEventPage from "./pages/EditEvent";
-import EventsPage, { loader as eventsLoader } from "./pages/Events";
-import EventDetailPage, { loader as eventDetailLoader, action as deleteEventAction } from "./pages/EventDetail";
-import HomePage from "./pages/Home";
-import NewEventPage from "./pages/NewEvent";
-import { action as maniuplateEventAction } from './components/EventForm'
-
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import RootLayout from "./pages/Root";
-import EventsRootLayout from "./pages/EventsRoots";
-import ErrorPage from "./pages/Error";
+import EditEventPage from './pages/EditEvent';
+import ErrorPage from './pages/Error';
+import EventDetailPage, {
+  loader as eventDetailLoader,
+  action as deleteEventAction,
+} from './pages/EventDetail';
+import EventsPage, { loader as eventsLoader } from './pages/Events';
+import EventsRootLayout from './pages/EventsRoot';
+import HomePage from './pages/Home';
+import NewEventPage from './pages/NewEvent';
+import RootLayout from './pages/Root';
+import { action as manipulateEventAction } from './components/EventForm';
+import NewsletterPage, { action as newsletterAction } from './pages/Newsletter';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
       {
-        path: "events",
+        path: 'events',
         element: <EventsRootLayout />,
         children: [
           {
             index: true,
-            path: "",
             element: <EventsPage />,
             loader: eventsLoader,
           },
           {
-            path: ":eventId",
+            path: ':eventId',
             id: 'event-detail',
             loader: eventDetailLoader,
-            action: deleteEventAction,
             children: [
               {
                 index: true,
-                element: <EventDetailPage />
+                element: <EventDetailPage />,
+                action: deleteEventAction,
               },
-              { path: "edit", element: <EditEventPage />, action: maniuplateEventAction },
+              {
+                path: 'edit',
+                element: <EditEventPage />,
+                action: manipulateEventAction,
+              },
             ],
           },
-          { path: "new", element: <NewEventPage />, action: maniuplateEventAction },
+          {
+            path: 'new',
+            element: <NewEventPage />,
+            action: manipulateEventAction,
+          },
         ],
+      },
+      {
+        path: 'newsletter',
+        element: <NewsletterPage />,
+        action: newsletterAction,
       },
     ],
   },
